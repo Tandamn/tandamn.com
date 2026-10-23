@@ -512,7 +512,9 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
     const slots = gsap.utils.toArray('#wm span:not(.sr)');
     const intro = gsap.timeline({ delay: .2 });
     intro.from(letters.slice(0, 7), { yPercent: -260, rotation: () => rand(-40, 40), opacity: 0, duration: 1.1, ease: 'bounce.out', stagger: .08 })
-         .from(letters[7], { yPercent: -300, duration: .7, ease: 'back.out(3)' }, '-=.4')
+         // the "!" stays hidden until its turn (it used to hang visibly above the logo while the letters fell)
+         .from(letters[7], { yPercent: -500, duration: .9, ease: 'bounce.out' }, '-=.4')
+         .from(letters[7], { opacity: 0, duration: .15, ease: 'none' }, '<')
          .from(letters[8], { scale: 0, duration: .8, ease: 'elastic.out(1.2, .35)', onComplete: () => { const r = letters[8].getBoundingClientRect(); burst((r.left + r.width / 2) / PX, (r.top + r.height / 2) / PX, 24, 1.1); } }, '-=.2')
          .from('.tagline, .eyebrow', { y: 24, opacity: 0, duration: .6, ease: 'power3.out', stagger: .1 }, '-=.5');
     letters.forEach(l => l.addEventListener('pointerenter', () => gsap.fromTo(l, { y: 0 }, { y: -18, duration: .16, yoyo: true, repeat: 1, ease: 'steps(3)' })));
