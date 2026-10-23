@@ -159,7 +159,8 @@ main { position: relative; z-index: 10; }
   font-weight: 900; letter-spacing: -.03em; line-height: 1.02;
   font-size: clamp(40px, 8.4vw, 112px); text-wrap: balance;
 }
-.manifesto .w { display: inline-block; opacity: .16; }
+.manifesto .w { display: inline-block; opacity: .38; }  /* unlit, yet 3:1+ on the night sky (large text) */
+.manifesto .w.hl { opacity: .6; }  /* the pink words need a little more to reach 3:1 */
 .manifesto .w.hl { color: var(--bang); }
 
 /* 3 · Day: Tandy Messenger is coming */
@@ -192,7 +193,7 @@ main { position: relative; z-index: 10; }
 
 footer {
   position: relative; z-index: 10; text-align: center;
-  padding-block: 0 calc(18lvh + env(safe-area-inset-bottom, 0px));
+  padding-block: 0 calc(4lvh + env(safe-area-inset-bottom, 0px));  /* the llama walks on the left by then, so little room is needed */
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
@@ -207,6 +208,7 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
 
 @media (max-width: 600px) {
   body { font-size: 16px; }
+  footer { padding-bottom: calc(12lvh + env(safe-area-inset-bottom, 0px)); }  /* on a phone the llama needs a bit more room */
 }
 @media (prefers-reduced-motion: reduce) {
   .hint i, .badge i { animation: none; }
@@ -219,8 +221,8 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <button class="llama" id="llama" type="button" aria-label="Tandy the llama. Tap to make him hop.">
-  <img class="night" src="assets/llama.png" alt="" width="222" height="358">
-  <img class="day" src="assets/llamaB.png" alt="" width="175" height="262">
+  <img class="night" src="assets/llama.webp" alt="" width="222" height="358">
+  <img class="day" src="assets/llamaB.webp" alt="" width="175" height="262">
 </button>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -253,9 +255,9 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
   <section class="scene soon" id="soon">
     <span class="badge">COMING SOON<i></i></span>
     <div class="product">
-      <img class="tile" id="tile" src="assets/iconB.png" alt="" width="225" height="218">
+      <img class="tile" id="tile" src="assets/iconB.webp" alt="" width="225" height="218" loading="lazy" decoding="async">
       <h2 class="sr">Tandy Messenger, the AI group chat app, is coming soon</h2>
-      <img class="name" id="tname" src="assets/tandy-wordmark-light.webp" alt="Tandy Messenger logo" width="1752" height="602">
+      <img class="name" id="tname" src="assets/tandy-wordmark-light.webp" alt="Tandy Messenger logo" width="980" height="337" loading="lazy" decoding="async">
     </div>
     <p class="pitch">Our first app is almost here. Tandy Messenger is a group chat app with an AI llama who builds useful and fun little things for you and your friends.</p>
     <a class="cta" href="https://tandymessenger.com/" id="cta">Meet Tandy Messenger <b>→</b></a>
@@ -533,8 +535,9 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
     // 3 · the tile flips in and the name rises
     gsap.timeline({ scrollTrigger: { trigger: '#soon', start: 'clamp(top 85%)', end: 'clamp(top 20%)', scrub: 1 }  /* clamp: on short screens the page ends first, and the animation must still finish */ })
       .fromTo('#tile', { rotationY: 180, rotation: -20, scale: .4, y: 80 }, { rotationY: 0, rotation: 0, scale: 1, y: 0, ease: 'back.out(1.6)' }, 0)
-      .fromTo('#tname', { y: 70, scale: .85, opacity: .2 }, { y: 0, scale: 1, opacity: 1, ease: 'power2.out' }, .1)
-      .fromTo('.pitch, .cta, .stores', { y: 50, opacity: .2 }, { y: 0, opacity: 1, stagger: .1, ease: 'power2.out' }, .2);
+      // movement only, no fade: the text keeps full contrast at every point of the scroll
+      .fromTo('#tname', { y: 70, scale: .85 }, { y: 0, scale: 1, ease: 'power2.out' }, .1)
+      .fromTo('.pitch, .cta, .stores', { y: 50 }, { y: 0, stagger: .1, ease: 'power2.out' }, .2);
     loop(gsap.to('.product', { y: -10, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
   });
 
