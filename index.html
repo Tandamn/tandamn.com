@@ -59,6 +59,8 @@
 }
 .a11y-link svg { fill: currentColor; flex: none; }
 .a11y-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* phones: a round button with the icon alone; the words stay for screen readers */
+@media (max-width: 600px) { .a11y-link { width: 44px; padding: 0; justify-content: center; } .a11y-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 .a11y-wrap { position: absolute; z-index: 40; top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(16px, env(safe-area-inset-right, 0px)); }
 .skip { position: absolute; left: -9999px; top: calc(env(safe-area-inset-top, 0px) + 8px); z-index: 100; padding: 10px 14px; background: #fdd66c; color: #1c3055; font-weight: 800; border: 3px solid #1c3055; }
 .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); }
