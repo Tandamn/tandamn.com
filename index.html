@@ -59,7 +59,7 @@
 }
 .a11y-link svg { fill: currentColor; flex: none; }
 .a11y-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-.a11y-wrap { position: fixed; z-index: 40; top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(16px, env(safe-area-inset-right, 0px)); }
+.a11y-wrap { position: absolute; z-index: 40; top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(16px, env(safe-area-inset-right, 0px)); }
 .skip { position: absolute; left: -9999px; top: calc(env(safe-area-inset-top, 0px) + 8px); z-index: 100; padding: 10px 14px; background: #fdd66c; color: #1c3055; font-weight: 800; border: 3px solid #1c3055; }
 .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); }
 html.still *, html.still *::before, html.still *::after { animation-play-state: paused !important; }
@@ -140,7 +140,8 @@ main { position: relative; z-index: 10; }
 }
 .tagline em { font-style: normal; color: var(--bang); }
 .hint {
-  position: absolute; left: 50%; bottom: 20lvh; transform: translateX(-50%);
+  /* in the flow under the tagline: pinned near the bottom it landed on the text on short screens */
+  margin-top: clamp(4px, 2lvh, 24px);
   font-family: var(--font-pixel); font-size: 12px; letter-spacing: .14em; color: var(--sub);
   display: grid; justify-items: center; gap: 6px;
 }
@@ -223,7 +224,7 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
 </button>
 
 <a class="skip" href="#main">Skip to content</a>
-<div class="a11y-wrap"><a class="a11y-link" href="accessible.html"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="4.2" r="2.2"/><path d="M4 7.6l8 1.2 8-1.2.4 2-5.6 1.2v3.4l2.4 7.6-2 .6-3.2-6.8-3.2 6.8-2-.6 2.4-7.6v-3.4L3.6 9.6z"/></svg><span>Accessible version</span></a></div>
+<div class="a11y-wrap"><a class="a11y-link" href="accessible.html"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="4.2" r="2.2"/><path d="M4 7.6l8 1.2 8-1.2.4 2-5.6 1.2v3.4l2.4 7.6-2 .6-3.2-6.8-3.2 6.8-2-.6 2.4-7.6v-3.4L3.6 9.6z"/></svg><span>Accessible Version</span></a></div>
 
 <main id="main">
   <section class="scene hero" id="hero">
