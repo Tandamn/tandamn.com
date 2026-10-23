@@ -1,31 +1,505 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tandamn!</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100svh;
-      display: grid;
-      place-items: center;
-      background: white;
-      color: black;
-    }
-    main {
-      padding: 24px;
-      text-align: center;
-    }
-    h1 { margin: 0 0 16px; }
-    p { margin: 0; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tandamn! · We make things worth a damn | Tandy Messenger coming soon</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tandamn! makes playful apps people use together. Our first app, Tandy Messenger, an AI group chat app with a llama who builds, is coming soon to iPhone and Android.">
+<meta name="keywords" content="Tandamn, Tandamn!, Tandy, Tandy Messenger, AI group chat, AI messenger, group chat app, AI chat app, social app, app for friends, AI llama">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Tandamn!">
+<meta name="theme-color" content="#23203d">
+<link rel="canonical" href="https://www.tandamn.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tandamn!">
+<meta property="og:url" content="https://www.tandamn.com/">
+<meta property="og:title" content="Tandamn! · We make things worth a damn">
+<meta property="og:description" content="Playful apps people use together. Tandy Messenger, our AI group chat app, is coming soon to iPhone and Android.">
+<meta property="og:image" content="https://www.tandamn.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The tandamn! pixel logo with Tandy the llama">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tandamn! · We make things worth a damn">
+<meta name="twitter:description" content="Playful apps people use together. Tandy Messenger is coming soon.">
+<meta name="twitter:image" content="https://www.tandamn.com/assets/og.jpg">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://www.tandamn.com/#org", "name": "Tandamn!", "alternateName": ["Tandamn", "Tandamn Inc"], "url": "https://www.tandamn.com/", "logo": "https://www.tandamn.com/assets/icon.png", "image": "https://www.tandamn.com/assets/og.jpg", "slogan": "We make things worth a damn.", "description": "Tandamn! makes playful apps that people use together. Its first app, Tandy Messenger, is an AI group chat app coming soon to iPhone and Android.", "sameAs": ["https://www.tandamn.com/tandymessenger/"], "brand": {"@type": "Brand", "name": "Tandy Messenger", "url": "https://www.tandamn.com/tandymessenger/"}}, {"@type": "WebSite", "@id": "https://www.tandamn.com/#site", "url": "https://www.tandamn.com/", "name": "Tandamn!", "publisher": {"@id": "https://www.tandamn.com/#org"}, "inLanguage": "en"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&family=Silkscreen:wght@400;700&display=swap">
+<style>
+/* Layout: one pixel world behind the page (night sky → dawn → day), three scenes on top of it. */
+:root {
+  /* Night (the page starts here); the script moves these toward day as you scroll. */
+  --ink: #f8edd7;      /* cream text */
+  --sub: #c9b3f0;      /* lilac line */
+  --logo: #f8edd7;
+  --bang: #f2b0c4;     /* pink "!" */
+  --dot: #bfe5d4;      /* mint dot */
+  --night: #23203d;    /* navy ground */
+  --butter: #fdd66c;
+  --sky: #79b1fe;
+  --pink: #f4afb2;
+  --font-display: "Rubik", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-pixel: "Silkscreen", ui-monospace, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+a { color: inherit; }
+:focus-visible { outline: 3px dashed var(--bang); outline-offset: 4px; }
+
+/* The pixel world */
+#world {
+  position: fixed; inset: 0; width: 100vw; height: 100lvh;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+  z-index: 0; pointer-events: none;
+}
+#fx {
+  position: fixed; inset: 0; width: 100vw; height: 100lvh;
+  image-rendering: pixelated; z-index: 30; pointer-events: none;
+}
+.llama {
+  position: fixed; z-index: 5; top: 0; left: 0;
+  width: clamp(72px, 11vw, 132px); aspect-ratio: 222 / 358;
+  cursor: pointer; border: 0; padding: 0; background: none;
+  will-change: transform;
+}
+.llama { transform-origin: 50% 100%; }
+.llama img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.llama .day { opacity: 0; }
+
+main { position: relative; z-index: 10; }
+.scene {
+  position: relative;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* 1 · Night: the wordmark */
+.hero {
+  min-height: 100svh;
+  display: grid; place-items: center; align-content: center; gap: 28px;
+  padding-block: 12vh 18vh;
+  text-align: center;
+}
+.eyebrow {
+  font-family: var(--font-pixel); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sub); margin: 0;
+}
+.wm {
+  position: relative; width: min(88vw, 820px); aspect-ratio: 1136 / 216; max-width: 100%;
+}
+.wm span:not(.sr) { position: absolute; display: block; will-change: transform; }
+.wm i {
+  display: block; width: 100%; height: 100%;
+  background: var(--logo);
+  -webkit-mask: var(--m) center / 100% 100% no-repeat; mask: var(--m) center / 100% 100% no-repeat;
+  cursor: pointer;
+}
+.wm .bang i { background: var(--bang); }
+.wm .dot i { background: var(--dot); }
+.hero-copy { display: grid; justify-items: center; gap: 28px; }
+.tagline {
+  margin: 0; font-weight: 800; letter-spacing: -.02em; line-height: 1.05;
+  font-size: clamp(30px, 5.4vw, 64px); text-wrap: balance;
+}
+.tagline em { font-style: normal; color: var(--bang); }
+.hint {
+  position: absolute; left: 50%; bottom: 20lvh; transform: translateX(-50%);
+  font-family: var(--font-pixel); font-size: 12px; letter-spacing: .14em; color: var(--sub);
+  display: grid; justify-items: center; gap: 6px;
+}
+.hint i {
+  display: block; width: 14px; height: 14px; background: var(--sub);
+  clip-path: polygon(0 0, 100% 0, 100% 34%, 72% 34%, 72% 66%, 50% 100%, 28% 66%, 28% 34%, 0 34%);
+  animation: nudge 1.2s steps(3) infinite;
+}
+@keyframes nudge { 50% { transform: translateY(6px); } }
+
+/* 2 · Dawn: one sentence, lit word by word */
+.dawn { height: 100svh; display: grid; place-items: center; }
+.manifesto {
+  margin: 0; max-width: 15ch; text-align: center;
+  font-weight: 900; letter-spacing: -.03em; line-height: 1.02;
+  font-size: clamp(40px, 8.4vw, 112px); text-wrap: balance;
+}
+.manifesto .w { display: inline-block; opacity: .16; }
+.manifesto .w.hl { color: var(--bang); }
+
+/* 3 · Day: Tandy Messenger is coming */
+.soon {
+  min-height: 100svh; display: grid; place-items: center; align-content: center; gap: 26px;
+  padding-block: 14vh 30vh; text-align: center;
+}
+.badge {
+  font-family: var(--font-pixel); font-size: 14px; letter-spacing: .1em;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 14px; background: var(--ink); color: var(--night);
+  box-shadow: 4px 4px 0 var(--bang);
+}
+.badge i { width: 10px; height: 14px; background: var(--night); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.product { display: grid; justify-items: center; gap: 8px; }
+.product .tile { width: clamp(96px, 14vw, 150px); filter: drop-shadow(0 14px 0 rgba(28, 48, 85, .14)); }
+.product .name { width: min(80vw, 520px); }
+.pitch { margin: 0; max-width: 34ch; font-size: clamp(18px, 2.1vw, 22px); font-weight: 500; color: var(--ink); text-wrap: balance; }
+.stores { margin: 0; font-family: var(--font-pixel); font-size: 13px; letter-spacing: .08em; color: var(--sub); }
+.cta {
+  display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+  font-weight: 800; font-size: 20px; color: #1c3055; background: var(--butter);
+  padding: 16px 26px; border: 3px solid #1c3055;
+  box-shadow: 6px 6px 0 #1c3055; transition: transform .12s steps(2), box-shadow .12s steps(2);
+}
+.cta:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #1c3055; }
+.cta:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 #1c3055; }
+.cta b { font-family: var(--font-pixel); font-weight: 700; }
+
+footer {
+  position: relative; z-index: 10; text-align: center;
+  padding-block: 0 calc(18lvh + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  font-family: var(--font-pixel); font-size: 12px; letter-spacing: .08em; color: var(--sub);
+}
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint i, .badge i { animation: none; }
+  .manifesto .w { opacity: 1; }
+}
+</style>
 </head>
 <body>
-  <main>
-    <h1>Tandamn!</h1>
-    <p>We make things worth a damn.</p>
-  </main>
+<canvas id="world" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<button class="llama" id="llama" type="button" aria-label="Tandy the llama. Tap to make him hop.">
+  <img class="night" src="assets/llama.png" alt="" width="222" height="358">
+  <img class="day" src="assets/llamaB.png" alt="" width="175" height="262">
+</button>
+
+<main>
+  <section class="scene hero" id="hero">
+    <div class="hero-copy">
+    <p class="eyebrow">Hello from Tandamn!</p>
+    <h1 class="wm" id="wm"><span class="sr">Tandamn!</span>
+      <span style="--m:url(assets/letter0.png);left:0%;top:2.78%;width:11.71%;height:96.3%"><i></i></span>
+      <span style="--m:url(assets/letter1.png);left:12.59%;top:22.69%;width:12.68%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter2.png);left:26.06%;top:22.69%;width:11.62%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter3.png);left:38.56%;top:0%;width:11.62%;height:100%"><i></i></span>
+      <span style="--m:url(assets/letter4.png);left:51.06%;top:23.15%;width:12.32%;height:75.93%"><i></i></span>
+      <span style="--m:url(assets/letter5.png);left:64.26%;top:22.69%;width:16.46%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter6.png);left:81.6%;top:22.69%;width:11.62%;height:76.39%"><i></i></span>
+      <span class="bang" style="--m:url(assets/bang.png);left:94.63%;top:3.7%;width:5.37%;height:60.19%"><i></i></span>
+      <span class="dot" style="--m:url(assets/dot.png);left:94.72%;top:69.44%;width:5.28%;height:29.63%"><i></i></span>
+    </h1>
+    <p class="tagline">We make things <em>worth a damn.</em></p>
+    </div>
+    <div class="hint" aria-hidden="true">SCROLL<i></i></div>
+  </section>
+
+  <section class="scene dawn" id="dawn">
+    <p class="manifesto" id="manifesto">Small team. Big ideas. Things that make people <span class="hl">play together.</span></p>
+  </section>
+
+  <section class="scene soon" id="soon">
+    <span class="badge">COMING SOON<i></i></span>
+    <div class="product">
+      <img class="tile" id="tile" src="assets/iconB.png" alt="" width="225" height="218">
+      <h2 class="sr">Tandy Messenger, the AI group chat app, is coming soon</h2>
+      <img class="name" id="tname" src="assets/tandy-wordmark-light.webp" alt="Tandy Messenger logo" width="1908" height="824">
+    </div>
+    <p class="pitch">Our first app is almost here. Tandy Messenger is a group chat app with an AI llama who builds fun little things for you and your friends.</p>
+    <a class="cta" href="/tandymessenger/" id="cta">Meet Tandy Messenger <b>→</b></a>
+    <p class="stores">SOON ON IPHONE AND ANDROID</p>
+  </section>
+</main>
+
+<footer>MADE WITH ❤️ BY TANDAMN! · © 2026 · <a href="/tandymessenger/">TANDY MESSENGER</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(pointer: fine)').matches;
+  const root = document.documentElement;
+
+  // ---------- colour helpers ----------
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
+  // Three moments of the sky: [top, middle, bottom of the sky]
+  const NIGHT = ['#14122a', '#23203d', '#3b305e'].map(hex);
+  const DAWN  = ['#4a3a7c', '#b985b9', '#f7c39c'].map(hex);
+  const DAY   = ['#8fc0f7', '#cfe4fb', '#f5f9fc'].map(hex);
+  const skyAt = (t, k) => t < .5 ? mix(NIGHT[k], DAWN[k], t / .5) : mix(DAWN[k], DAY[k], (t - .5) / .5);
+  // Text colours: [night, day]
+  const TEXT = {
+    '--ink':  ['#f8edd7', '#1c3055'],
+    '--sub':  ['#c9b3f0', '#4a5f86'],
+    '--logo': ['#f8edd7', '#1c3055'],
+    '--bang': ['#f2b0c4', '#e8868f'],
+    '--dot':  ['#bfe5d4', '#f4afb2'],
+    '--night':['#23203d', '#f5f9fc'],
+  };
+  for (const k in TEXT) TEXT[k] = TEXT[k].map(hex);
+
+  // ---------- the pixel world ----------
+  const world = document.getElementById('world'), g = world.getContext('2d');
+  const fx = document.getElementById('fx'), f = fx.getContext('2d');
+  let W = 0, H = 0, PX = 6, stars = [], clouds = [], flowers = [], flies = [];
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  function size() {
+    PX = innerWidth < 600 ? 4 : 6;
+    W = Math.ceil(innerWidth / PX); H = Math.ceil(innerHeight / PX);
+    world.width = fx.width = W; world.height = fx.height = H;
+    stars = Array.from({ length: Math.round(W * H / 220) }, () => ({
+      x: rand(0, W) | 0, y: rand(0, H * .62) | 0, big: Math.random() < .12, ph: rand(0, 6.28), sp: rand(.6, 2),
+    }));
+    clouds = Array.from({ length: 5 }, (_, i) => ({ x: rand(0, W), y: rand(H * .08, H * .42), s: rand(.7, 1.4), v: rand(.02, .06) }));
+    flowers = Array.from({ length: Math.round(W / 9) }, () => ({ x: rand(0, W * 1.3) | 0, c: Math.random() < .5 ? '#f4afb2' : '#fdd66c' }));
+    flies = Array.from({ length: 14 }, () => ({ x: rand(0, W), y: rand(H * .45, H * .85), ph: rand(0, 6.28), c: Math.random() < .5 ? '#bfe5d4' : '#f2b0c4' }));
+  }
+
+  const hillY = (x, base, amp, freq, off) => Math.round(base - amp * (Math.sin((x + off) * freq) * .6 + Math.sin((x + off) * freq * 2.3 + 1.7) * .4));
+
+  function disc(cx, cy, r, color) {
+    g.fillStyle = color;
+    for (let y = -r; y <= r; y++) {
+      const span = Math.round(Math.sqrt(r * r - y * y));
+      g.fillRect(Math.round(cx - span), Math.round(cy + y), span * 2 + 1, 1);
+    }
+  }
+  // clouds are drawn opaque, fading from the sky colour to white (overlapping alpha leaves seams)
+  function cloud(x, y, s, a) {
+    const c = rgb(mix(skyAt(sky, 1), [255, 255, 255], a));
+    disc(x, y, 5 * s, c); disc(x + 7 * s, y - 3 * s, 6 * s, c); disc(x + 14 * s, y, 5 * s, c);
+    g.fillStyle = c; g.fillRect(Math.round(x), Math.round(y), Math.round(14 * s), Math.round(5 * s) + 1);
+  }
+
+  // sky = 0 (night) … 1 (day); walk = 0 … 1 over the whole page
+  let sky = 0, walk = 0, skyTarget = 0, walkTarget = 0, time = 0;
+
+  function drawWorld() {
+    // banded sky with a dithered seam between bands
+    const BANDS = 9, top = skyAt(sky, 0), mid = skyAt(sky, 1), bot = skyAt(sky, 2);
+    const bandColor = b => { const t = b / (BANDS - 1); return rgb(t < .5 ? mix(top, mid, t * 2) : mix(mid, bot, (t - .5) * 2)); };
+    const bh = H / BANDS;
+    for (let b = 0; b < BANDS; b++) { g.fillStyle = bandColor(b); g.fillRect(0, Math.floor(b * bh), W, Math.ceil(bh) + 1); }
+    for (let b = 1; b < BANDS; b++) {
+      const y = Math.floor(b * bh); g.fillStyle = bandColor(b - 1);
+      for (let x = (y & 1); x < W; x += 2) g.fillRect(x, y, 1, 1);
+    }
+
+    const night = 1 - smooth(.18, .55, sky), day = smooth(.5, .9, sky);
+
+    // stars
+    if (night > 0) for (const s of stars) {
+      const a = night * (.45 + .55 * Math.sin(time * s.sp + s.ph) ** 2);
+      g.fillStyle = `rgba(248,237,215,${a})`;
+      g.fillRect(s.x, s.y, 1, 1);
+      if (s.big) { g.fillRect(s.x - 1, s.y, 3, 1); g.fillRect(s.x, s.y - 1, 1, 3); }
+    }
+    // moon sets, sun rises
+    const moonY = H * .16 + smooth(0, .55, sky) * H * .6;
+    if (night > 0) { g.globalAlpha = night; disc(W * .8, moonY, Math.max(5, W * .028), '#f8edd7'); disc(W * .8 - 2, moonY + 1, 1, '#e5d6bb'); disc(W * .8 + 3, moonY - 2, 1, '#e5d6bb'); g.globalAlpha = 1; }
+    const sunY = H * .95 - smooth(.3, .85, sky) * H * .72, sunR = Math.max(7, W * .04);
+    if (sky > .25) {
+      const ray = Math.round(time * 2) % 2;
+      g.fillStyle = 'rgba(253,214,108,.55)';
+      for (let i = 0; i < 12; i++) {
+        const a = i / 12 * 6.283 + time * .15, d = sunR + 3 + ray;
+        g.fillRect(Math.round(W * .24 + Math.cos(a) * d), Math.round(sunY + Math.sin(a) * d), 2, 2);
+      }
+      disc(W * .24, sunY, sunR + 1, '#fde9a8'); disc(W * .24, sunY, sunR, '#fdd66c');
+    }
+    // clouds
+    if (day > 0) for (const c of clouds) {
+      c.x += c.v; if (c.x > W + 30) c.x = -30;
+      cloud(c.x, c.y, c.s, day * .95);
+    }
+    // fireflies at night
+    if (night > 0) for (const p of flies) {
+      const x = Math.round(p.x + Math.sin(time * .7 + p.ph) * 6), y = Math.round(p.y + Math.cos(time * .5 + p.ph) * 4);
+      g.globalAlpha = night * (.4 + .6 * Math.abs(Math.sin(time * 1.3 + p.ph))); g.fillStyle = p.c; g.fillRect(x, y, 1, 1); g.globalAlpha = 1;
+    }
+    // hills (parallax with the walk)
+    const backC = rgb(mix(hex('#2d284d'), hex('#b9e2d0'), smooth(.3, .9, sky)));
+    const frontC = rgb(mix(hex('#3b3463'), hex('#9fd4bc'), smooth(.3, .9, sky)));
+    const offB = walk * 40, offF = walk * 110;
+    g.fillStyle = backC;
+    for (let x = 0; x < W; x++) { const y = hillY(x, H * .8, H * .05, .035, offB); g.fillRect(x, y, 1, H - y); }
+    g.fillStyle = frontC;
+    for (let x = 0; x < W; x++) { const y = hillY(x, H * .9, H * .03, .022, offF + 300); g.fillRect(x, y, 1, H - y); }
+    if (day > 0) {
+      g.globalAlpha = day;
+      for (const fl of flowers) {
+        const x = Math.round(((fl.x - offF) % (W * 1.3) + W * 1.3) % (W * 1.3)); if (x >= W) continue;
+        const y = hillY(x, H * .9, H * .03, .022, offF + 300);
+        g.fillStyle = '#6fbf98'; g.fillRect(x, y - 1, 1, 1);
+        g.fillStyle = fl.c; g.fillRect(x, y - 2, 1, 1);
+      }
+      g.globalAlpha = 1;
+    }
+    return { night, day, frontY: x => hillY(x, H * .9, H * .03, .022, offF + 300) };
+  }
+
+  // ---------- sparkles (cursor trail, hops, the day switch) ----------
+  const COLORS = ['#f2b0c4', '#bfe5d4', '#fdd66c', '#a688e2', '#79b1fe', '#f8edd7'];
+  let bits = [];
+  function burst(cx, cy, n = 18, spread = 1) {
+    for (let i = 0; i < n; i++) bits.push({ x: cx, y: cy, vx: rand(-1, 1) * spread, vy: rand(-1.6, -.2) * spread, life: rand(30, 60), c: COLORS[i % COLORS.length] });
+  }
+  function drawBits() {
+    f.clearRect(0, 0, W, H);
+    bits = bits.filter(b => (b.life -= 1) > 0);
+    for (const b of bits) {
+      b.x += b.vx; b.y += b.vy; b.vy += .05;
+      f.globalAlpha = Math.min(1, b.life / 20); f.fillStyle = b.c; f.fillRect(Math.round(b.x), Math.round(b.y), 1, 1);
+    }
+    f.globalAlpha = 1;
+  }
+  if (finePointer && !reduce) {
+    let last = 0;
+    addEventListener('pointermove', e => {
+      const now = performance.now(); if (now - last < 28) return; last = now;
+      bits.push({ x: e.clientX / PX, y: e.clientY / PX, vx: rand(-.15, .15), vy: rand(-.1, .25), life: 34, c: COLORS[(Math.random() * COLORS.length) | 0] });
+    }, { passive: true });
+  }
+  addEventListener('pointerdown', e => { if (!reduce) burst(e.clientX / PX, e.clientY / PX, 10, .7); }, { passive: true });
+
+  // ---------- the llama ----------
+  const llama = document.getElementById('llama');
+  const [llNight, llDay] = llama.querySelectorAll('img');
+  const jump = { t: 0 };
+  let wasDay = false;
+  llama.addEventListener('click', () => {
+    if (reduce) return;
+    gsap.fromTo(jump, { t: 0 }, { t: 1, duration: .55, ease: 'power1.inOut' });
+    const r = llama.getBoundingClientRect(); burst((r.left + r.width / 2) / PX, r.top / PX, 22, 1);
+  });
+
+  function placeLlama(frontY, day) {
+    const lw = llama.offsetWidth, lh = llama.offsetHeight;
+    // walks right → left along the front hill as the page goes by
+    const x = (innerWidth - lw - innerWidth * .06) - walk * (innerWidth - lw - innerWidth * .12);
+    const footX = Math.round((x + lw / 2) / PX);
+    const groundTop = frontY(Math.max(0, Math.min(W - 1, footX))) * PX;
+    const step = reduce ? 0 : Math.abs(Math.sin(walk * 60)) * 6;
+    const breathe = reduce ? 1 : 1 + Math.sin(time * 2) * .015;
+    const y = groundTop - lh + 6 - step - Math.sin(jump.t * Math.PI) * 46;
+    llama.style.transform = `translate3d(${x}px, ${y}px, 0) scaleY(${breathe})`;
+    llNight.style.opacity = String(1 - day); llDay.style.opacity = String(day);
+    const isDay = day > .5;
+    if (isDay !== wasDay) { wasDay = isDay; if (!reduce) burst((x + lw / 2) / PX, (y + lh / 2) / PX, 26, 1.2); }
+  }
+
+  // ---------- text colours follow the sky ----------
+  let lastInk = -1;
+  function paintText() {
+    const t = smooth(.42, .62, sky);
+    if (Math.abs(t - lastInk) < .002) return; lastInk = t;
+    for (const k in TEXT) root.style.setProperty(k, rgb(mix(TEXT[k][0], TEXT[k][1], t)));
+    root.style.colorScheme = t > .5 ? 'light' : 'dark';
+  }
+
+  // ---------- scroll ----------
+  gsap.registerPlugin(ScrollTrigger);
+  const words = [];
+  const man = document.getElementById('manifesto');
+  // split the sentence into words (keeping the pink highlight on its words)
+  (function split(node, hl) {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(part); return; }
+          const s = document.createElement('span'); s.className = 'w' + (hl ? ' hl' : ''); s.textContent = part; frag.append(s); words.push(s);
+        });
+        n.replaceWith(frag);
+      } else { split(n, hl || n.classList.contains('hl')); if (n.classList.contains('hl')) n.classList.remove('hl'); }
+    });
+  })(man, false);
+
+
+
+  const dawnST = ScrollTrigger.create({ trigger: '#dawn', start: 'top top', end: '+=160%', pin: true });
+
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // 1 · letters fall into place
+    const letters = gsap.utils.toArray('#wm i');
+    const slots = gsap.utils.toArray('#wm span:not(.sr)');
+    const intro = gsap.timeline({ delay: .2 });
+    intro.from(letters.slice(0, 7), { yPercent: -260, rotation: () => rand(-40, 40), opacity: 0, duration: 1.1, ease: 'bounce.out', stagger: .08 })
+         .from(letters[7], { yPercent: -300, duration: .7, ease: 'back.out(3)' }, '-=.4')
+         .from(letters[8], { scale: 0, duration: .8, ease: 'elastic.out(1.2, .35)', onComplete: () => { const r = letters[8].getBoundingClientRect(); burst((r.left + r.width / 2) / PX, (r.top + r.height / 2) / PX, 24, 1.1); } }, '-=.2')
+         .from('.tagline, .eyebrow', { y: 24, opacity: 0, duration: .6, ease: 'power3.out', stagger: .1 }, '-=.5');
+    letters.forEach(l => l.addEventListener('pointerenter', () => gsap.fromTo(l, { y: 0 }, { y: -18, duration: .16, yoyo: true, repeat: 1, ease: 'steps(3)' })));
+
+    // letters scatter as night ends
+    gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } })
+      .to(slots, { x: (i) => (i - 4) * rand(30, 70), y: () => rand(-220, -80), rotation: () => rand(-50, 50), ease: 'power1.in', stagger: .02 }, 0)
+      .to('.hero-copy', { y: -80, opacity: 0, ease: 'power1.in' }, 0)
+      .to('.hint', { opacity: 0, ease: 'none' }, 0);
+
+    // 2 · words light up at dawn
+    gsap.timeline({ scrollTrigger: { trigger: '#dawn', start: 'top top', end: '+=140%', scrub: true } })
+      .to(words, { opacity: 1, stagger: .4, ease: 'none', duration: 1 });
+
+    // 3 · the tile flips in and the name rises
+    gsap.timeline({ scrollTrigger: { trigger: '#soon', start: 'top 85%', end: 'top 20%', scrub: 1 } })
+      .from('#tile', { rotationY: 180, rotation: -20, scale: .4, y: 80, ease: 'back.out(1.6)' }, 0)
+      .from('#tname', { y: 70, scale: .85, opacity: .2, ease: 'power2.out' }, .1)
+      .from('.pitch, .cta, .stores', { y: 50, opacity: .2, stagger: .1, ease: 'power2.out' }, .2);
+    gsap.to('#tile', { y: -10, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  });
+
+  function targets() {
+    const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    walkTarget = clamp(scrollY / max);
+    skyTarget = clamp((scrollY - dawnST.start + innerHeight * .3) / (dawnST.end - dawnST.start + innerHeight * .4));
+  }
+
+  // ---------- loop ----------
+  size(); targets(); sky = skyTarget; walk = walkTarget;
+  addEventListener('resize', () => { size(); targets(); });
+  addEventListener('scroll', targets, { passive: true });
+  ScrollTrigger.addEventListener('refresh', targets);
+  gsap.ticker.add((t) => {
+    time = t;
+    const k = reduce ? 1 : .08;
+    sky += (skyTarget - sky) * k; walk += (walkTarget - walk) * k;
+    const w = drawWorld();
+    placeLlama(w.frontY, w.day);
+    paintText();
+    drawBits();
+  });
+})();
+</script>
 </body>
 </html>
