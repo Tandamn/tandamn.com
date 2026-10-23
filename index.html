@@ -65,7 +65,7 @@
 html.still *, html.still *::before, html.still *::after { animation-play-state: paused !important; }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: auto; }
+html { scroll-behavior: auto; overflow-x: clip; }  /* the scattering letters may fly past the edge; the page never scrolls sideways */
 /* no rubber-band past the top or bottom (it showed a bare background) */
 html, body { overscroll-behavior-y: none; }
 body {
@@ -204,11 +204,17 @@ footer .bar {
   font-size: 15px; font-weight: 500; line-height: 1.4;
 }
 footer .bar a { color: inherit; font-weight: 700; text-underline-offset: 3px; padding-block: 6px; }
+/* always two rows: the credit on top, the links centred under it */
+footer .bar > span { flex-basis: 100%; text-align: center; font-size: 14px; }
+@media (max-width: 440px) { footer .bar { gap: 6px 14px; padding: 12px 14px; font-size: 14px; } }  /* the three links fit one row on a phone */
+@media (max-width: 350px) { footer .bar { gap: 6px 10px; padding: 12px 10px; font-size: 13px; } }
 footer .bar a:hover { text-decoration-thickness: 2px; }
 
+@media (max-width: 900px) {
+  footer { padding-bottom: calc(12lvh + max(72px, 11vw) * 1.62 + 20px + env(safe-area-inset-bottom, 0px)); }
+}
 @media (max-width: 600px) {
   body { font-size: 16px; }
-  footer { padding-bottom: calc(12lvh + env(safe-area-inset-bottom, 0px)); }  /* on a phone the llama needs a bit more room */
 }
 @media (prefers-reduced-motion: reduce) {
   .hint i, .badge i { animation: none; }
