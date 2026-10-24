@@ -64,6 +64,7 @@
 .a11y-wrap { position: absolute; z-index: 40; top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(16px, env(safe-area-inset-right, 0px)); }
 .skip { position: absolute; left: -9999px; top: calc(env(safe-area-inset-top, 0px) + 8px); z-index: 100; padding: 10px 14px; background: #fdd66c; color: #1c3055; font-weight: 800; border: 3px solid #1c3055; }
 .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); }
+#wm { scroll-margin-top: 40vh; }  /* the skip link's target stays in full view */
 html.still *, html.still *::before, html.still *::after { animation-play-state: paused !important; }
 
 * { box-sizing: border-box; }
@@ -225,6 +226,7 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
 </style>
 </head>
 <body>
+<a class="skip" href="#wm">Skip to content</a>
 <canvas id="world" aria-hidden="true"></canvas>
 <canvas id="fx" aria-hidden="true"></canvas>
 
@@ -233,14 +235,13 @@ footer .bar a:hover { text-decoration-thickness: 2px; }
   <img class="day" src="assets/llamaB.webp" alt="" width="175" height="262">
 </button>
 
-<a class="skip" href="#main">Skip to content</a>
 <div class="a11y-wrap"><a class="a11y-link" href="accessible.html"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="4.2" r="2.2"/><path d="M4 7.6l8 1.2 8-1.2.4 2-5.6 1.2v3.4l2.4 7.6-2 .6-3.2-6.8-3.2 6.8-2-.6 2.4-7.6v-3.4L3.6 9.6z"/></svg><span>Accessible Version</span></a></div>
 
 <main id="main">
   <section class="scene hero" id="hero">
     <div class="hero-copy">
     <p class="eyebrow">Hello from Tandamn!</p>
-    <h1 class="wm" id="wm"><span class="sr">Tandamn!</span>
+    <h1 class="wm" id="wm" tabindex="-1"><span class="sr">Tandamn!</span>
       <span style="--m:url(assets/letter0.png);left:0%;top:2.78%;width:11.71%;height:96.3%"><i></i></span>
       <span style="--m:url(assets/letter1.png);left:12.59%;top:22.69%;width:12.68%;height:76.39%"><i></i></span>
       <span style="--m:url(assets/letter2.png);left:26.06%;top:22.69%;width:11.62%;height:76.39%"><i></i></span>
