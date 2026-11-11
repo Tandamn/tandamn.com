@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Team · Tandamn!</title>
+<meta name="description" content="The founding team behind Tandamn!, the maker of Tandy Messenger: Nadav Buchwalter, CEO and co-founder, and Ran Dror, CTO and co-founder.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#23203d">
+<link rel="canonical" href="https://www.tandamn.com/team.html">
+<link rel="icon" type="image/png" href="assets/iconB.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://www.tandamn.com/#org", "name": "Tandamn!", "alternateName": ["Tandamn"], "url": "https://www.tandamn.com/", "sameAs": ["https://www.linkedin.com/company/tandamn", "https://tandymessenger.com/"], "founder": [{"@type": "Person", "name": "Nadav Buchwalter", "jobTitle": "CEO & Co-founder", "sameAs": "https://www.linkedin.com/in/nadavbuchwalter/"}, {"@type": "Person", "name": "Ran Dror", "jobTitle": "CTO & Co-founder", "sameAs": "https://www.linkedin.com/in/randror/"}]}</script>
+<style>
+/* fonts are served from this site (no requests to Google) */
+@font-face { font-family: "Rubik"; font-style: normal; font-weight: 300 900; font-display: swap; src: url(fonts/rubik.woff2) format("woff2"); }
+@font-face { font-family: "Silkscreen"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/silkscreen-400.woff2) format("woff2"); }
+
+/* The home page's night, without the scroll story */
+:root {
+  --night: #23203d; --ink: #f8edd7; --sub: #c9b3f0; --bang: #f2b0c4; --dot: #bfe5d4; --butter: #fdd66c; --navy: #1c3055;
+  --card-bg: #f8edd7; --card-ink: #1c3055; --card-sub: #4a3f78; --card-link: #2a4fa0;
+  --font-display: "Rubik", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-pixel: "Silkscreen", ui-monospace, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100svh; display: flex; flex-direction: column;
+  color: var(--ink); font-family: var(--font-display); font-size: 1.125rem; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  /* pixel stars on the night sky */
+  background-color: var(--night);
+  background-image:
+    linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--sub), var(--sub)), linear-gradient(var(--ink), var(--ink)),
+    linear-gradient(var(--dot), var(--dot)), linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--sub), var(--sub));
+  background-size: 3px 3px, 3px 3px, 2px 2px, 3px 3px, 2px 2px, 2px 2px;
+  background-position: 8% 12%, 88% 8%, 20% 46%, 92% 38%, 70% 22%, 6% 78%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 3px dashed var(--ink); outline-offset: 4px; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -9999px; top: .5rem; z-index: 100; padding: .6rem .9rem; background: var(--butter); color: var(--navy); font-weight: 800; border: 3px solid var(--navy); }
+.skip:focus { left: 1rem; }
+
+/* top: the wordmark (home link) and the Accessible Version button */
+.top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem;
+  max-width: 48rem; width: 100%; margin-inline: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 1rem) max(1rem, env(safe-area-inset-right, 0px)) 0 max(1rem, env(safe-area-inset-left, 0px));
+}
+.home { display: block; text-decoration: none; padding: .4rem 0; }
+.wm { position: relative; display: block; width: clamp(140px, 30vw, 200px); aspect-ratio: 1136 / 216; }
+.wm span:not(.sr) { position: absolute; display: block; }
+.wm i { display: block; width: 100%; height: 100%; background: var(--ink); -webkit-mask: var(--m) center / 100% 100% no-repeat; mask: var(--m) center / 100% 100% no-repeat; }
+.wm .bang i { background: var(--bang); }
+.wm .dot i { background: var(--dot); }
+
+/* the home page's Accessible Version button */
+.a11y-link {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 12px; border-radius: 999px;
+  background: var(--ink); color: var(--navy); text-decoration: none;
+  font: 600 15px/1 var(--font-display); box-shadow: 0 4px 14px rgba(20, 18, 42, .22);
+}
+.a11y-link svg { fill: currentColor; flex: none; }
+.a11y-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* phones: a round button with the icon alone; the words stay for screen readers */
+@media (max-width: 600px) { .a11y-link { width: 44px; padding: 0; justify-content: center; } .a11y-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+
+main {
+  flex: 1; max-width: 48rem; width: 100%; margin-inline: auto;
+  padding: 2.5rem max(1rem, env(safe-area-inset-right, 0px)) 2rem max(1rem, env(safe-area-inset-left, 0px));
+}
+h1 { margin: 0 0 2rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(2.2rem, 6vw, 3.5rem); text-wrap: balance; scroll-margin-top: 1rem; }
+h2 { margin: 3rem 0 1rem; font-family: var(--font-pixel); font-weight: 400; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); }
+
+/* founders: cream cards with the pink pixel shadow */
+.people { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; }
+.people li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .9rem; background: var(--card-bg); color: var(--card-ink); padding: 1.25rem 1.4rem; box-shadow: 6px 6px 0 var(--bang); }
+.people img { width: 120px; height: 120px; flex: none; border-radius: 50%; }
+.people .info { min-width: 0; }
+.people .name { display: block; font-size: 1.4rem; font-weight: 800; letter-spacing: -.01em; }
+.people .role { display: block; font-family: var(--font-pixel); font-size: .8rem; letter-spacing: .08em; color: var(--card-sub); margin: .2rem 0 .8rem; }
+.people a { color: var(--card-link); font-weight: 600; }
+.people .amp { font-family: var(--font-display); font-weight: 700; }  /* the pixel font draws & like $ */
+
+.company p { margin: 0 0 1rem; max-width: 52ch; }
+.cta {
+  display: inline-flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; text-decoration: none;
+  font-weight: 800; font-size: 1.1rem; color: var(--navy); background: var(--butter);
+  padding: .8rem 1.3rem; border: 3px solid var(--navy); box-shadow: 5px 5px 0 var(--bang);
+}
+.cta:hover { text-decoration: underline; }
+.cta b { font-family: var(--font-pixel); font-weight: 400; }
+
+/* Tandy on the hill, then the same footer bar as the home page */
+.ground { position: relative; margin-top: 2rem; padding-top: 1px; }
+.ground img { width: 72px; margin: 0 0 -6px max(1rem, calc(50% - 22rem)); image-rendering: pixelated; position: relative; z-index: 1; }
+.hill { height: 3.5rem; background: #2e2850; box-shadow: 0 -6px 0 #3a3363; }
+footer { background: #2e2850; text-align: center; padding: 0 max(1rem, env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px)); }
+footer .bar {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem 1.1rem;
+  padding: .75rem 1.25rem; background: var(--ink); color: var(--night); box-shadow: 4px 4px 0 var(--bang);
+  font-size: .95rem; font-weight: 500; line-height: 1.4;
+}
+footer .bar > span { flex-basis: 100%; font-size: .875rem; }
+footer .bar a { font-weight: 700; padding-block: 6px; }
+footer .bar a[aria-current] { text-decoration-thickness: 3px; }
+@media (max-width: 440px) { footer .bar { gap: .4rem .6rem; padding: .75rem .6rem; font-size: .8rem; } }
+
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="top">
+  <a class="home" href="/" aria-label="Tandamn! home">
+    <span class="wm" aria-hidden="true">
+      <span style="--m:url(assets/letter0.png);left:0%;top:2.78%;width:11.71%;height:96.3%"><i></i></span>
+      <span style="--m:url(assets/letter1.png);left:12.59%;top:22.69%;width:12.68%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter2.png);left:26.06%;top:22.69%;width:11.62%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter3.png);left:38.56%;top:0%;width:11.62%;height:100%"><i></i></span>
+      <span style="--m:url(assets/letter4.png);left:51.06%;top:23.15%;width:12.32%;height:75.93%"><i></i></span>
+      <span style="--m:url(assets/letter5.png);left:64.26%;top:22.69%;width:16.46%;height:76.39%"><i></i></span>
+      <span style="--m:url(assets/letter6.png);left:81.6%;top:22.69%;width:11.62%;height:76.39%"><i></i></span>
+      <span class="bang" style="--m:url(assets/bang.png);left:94.63%;top:3.7%;width:5.37%;height:60.19%"><i></i></span>
+      <span class="dot" style="--m:url(assets/dot.png);left:94.72%;top:69.44%;width:5.28%;height:29.63%"><i></i></span>
+    </span>
+  </a>
+  <a class="a11y-link" href="team-accessible.html"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="4.2" r="2.2"/><path d="M4 7.6l8 1.2 8-1.2.4 2-5.6 1.2v3.4l2.4 7.6-2 .6-3.2-6.8-3.2 6.8-2-.6 2.4-7.6v-3.4L3.6 9.6z"/></svg><span>Accessible Version</span></a>
+</header>
+
+<main id="main" lang="en" dir="ltr">
+  <h1 id="content" tabindex="-1">The team</h1>
+  <ul class="people">
+    <li><img src="assets/team-nadav.png" alt="Portrait of Nadav Buchwalter" width="160" height="160"><div class="info"><span class="name">Nadav Buchwalter</span><span class="role">CEO <span class="amp">&amp;</span> CO-FOUNDER</span><a href="https://www.linkedin.com/in/nadavbuchwalter/" rel="noopener">Nadav on LinkedIn</a></div></li>
+    <li><img src="assets/team-ran.png" alt="Portrait of Ran Dror" width="160" height="160"><div class="info"><span class="name">Ran Dror</span><span class="role">CTO <span class="amp">&amp;</span> CO-FOUNDER</span><a href="https://www.linkedin.com/in/randror/" rel="noopener">Ran on LinkedIn</a></div></li>
+  </ul>
+
+  <section class="company" aria-labelledby="company-h">
+    <h2 id="company-h">Company</h2>
+    <a class="cta" href="https://www.linkedin.com/company/tandamn" rel="noopener">Tandamn on LinkedIn <b>→</b></a>
+    <p>To reach us, write to <a href="mailto:support@tandamn.com">support@tandamn.com</a>.</p>
+  </section>
+</main>
+
+<div class="ground" aria-hidden="true">
+  <img src="assets/llama.webp" alt="" width="222" height="358">
+  <div class="hill"></div>
+</div>
+<footer>
+  <nav class="bar" aria-label="Site">
+    <span>Made with ❤️ by Tandamn! · © 2026</span>
+    <a href="https://tandymessenger.com/">Tandy Messenger</a>
+    <a href="team.html" aria-current="page">Team</a>
+    <a href="accessibility.html">Accessibility</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</footer>
+
+</body>
+</html>
