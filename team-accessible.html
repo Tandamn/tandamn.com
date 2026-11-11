@@ -24,11 +24,6 @@ main h3 { font-size: 1.15rem; margin: 1.2rem 0 .3rem; }
 .lead { font-size: 1.25rem; }
 .meta { color: var(--ink-2); margin: 0 0 1.5rem; }
 section + section { border-top: 2px solid var(--line); margin-top: 3rem; padding-top: 2rem; }
-.people { list-style: none; padding: 0; margin: 0; }
-.people li { display: flex; align-items: center; gap: 1rem; margin: 0 0 1.5rem; }
-.people img { width: 80px; height: 80px; border-radius: 50%; flex: none; }
-.people h2 { margin: 0; }
-.people p { margin: .1rem 0; }
 main footer { border-top: 2px solid var(--line); margin-top: 3rem; padding-top: 1rem; }
 main footer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
 
@@ -57,6 +52,10 @@ body { line-height: var(--leading); }
 .tools-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .tools button:not(.tools-toggle) { font: inherit; font-size: .95rem; min-height: 44px; padding: .3rem .8rem; color: var(--t-ink); background: var(--t-bg); border: 2px solid var(--t-ink); border-radius: .4rem; cursor: pointer; }
 .tools button[aria-pressed="true"] { background: var(--t-ink); color: var(--t-bg); }
+.people { list-style: none; padding: 0; margin: 0; }
+.people li { margin: 0 0 1.5rem; }
+.people h2 { margin: 0; }
+.people p { margin: .1rem 0; }
 </style>
 </head>
 <body>
@@ -82,8 +81,8 @@ body { line-height: var(--leading); }
 <h1 id="content" tabindex="-1">The team</h1>
 
 <ul class="people">
-<li><img src="assets/team-nadav.png" alt="Portrait of Nadav Buchwalter" width="160" height="160"><div><h2>Nadav Buchwalter</h2><p>CEO &amp; Co-founder</p><p><a href="https://www.linkedin.com/in/nadavbuchwalter/">Nadav on LinkedIn</a></p></div></li>
-<li><img src="assets/team-ran.png" alt="Portrait of Ran Dror" width="160" height="160"><div><h2>Ran Dror</h2><p>CTO &amp; Co-founder</p><p><a href="https://www.linkedin.com/in/randror/">Ran on LinkedIn</a></p></div></li>
+<li><h2>Nadav Buchwalter</h2><p>CEO &amp; Co-founder</p><p><a href="https://www.linkedin.com/in/nadavbuchwalter/">Nadav on LinkedIn</a></p></li>
+<li><h2>Ran Dror</h2><p>CTO &amp; Co-founder</p><p><a href="https://www.linkedin.com/in/randror/">Ran on LinkedIn</a></p></li>
 </ul>
 
 <h2>Company</h2>
